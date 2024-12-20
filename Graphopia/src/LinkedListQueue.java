@@ -55,43 +55,6 @@ class LinkedListQueue<T> {
             }
         }
     }
-    void swapNodes(int index1, int index2) {
-        if (index1 == index2) return;
-
-        Node<T> prev1 = null, prev2 = null, node1 = head, node2 = head;
-        int count = 0;
-
-        while (node1 != null && count < index1) {
-            prev1 = node1;
-            node1 = node1.next;
-            count++;
-        }
-
-        count = 0;
-        while (node2 != null && count < index2) {
-            prev2 = node2;
-            node2 = node2.next;
-            count++;
-        }
-
-        if (node1 == null || node2 == null) return;
-
-        if (prev1 != null) {
-            prev1.next = node2;
-        } else {
-            head = node2;
-        }
-
-        if (prev2 != null) {
-            prev2.next = node1;
-        } else {
-            head = node1;
-        }
-
-        Node<T> temp = node1.next;
-        node1.next = node2.next;
-        node2.next = temp;
-    }
     int indexOf(T data) {
         Node<T> current = head;
         int index = 0;
