@@ -10,33 +10,6 @@ public class sortingPengunjung {
         }
         return hitung;
     }
-    public Node<Passenger> urutanNode(int index){
-        int i = 0;
-        Node<Passenger> current = head;
-        while (current != null) {
-            if (i == index) {
-                return current;
-            }
-            current = current.next;
-            i++;
-        }
-        return null;
-    }
-
-    public void swap(int index1, int index2) {
-        if (index1 == index2){
-            return;
-        } 
-
-        Node<Passenger> node1 = urutanNode(index1);
-        Node<Passenger> node2 = urutanNode(index2);
-
-        if (node1 != null && node2 != null) {
-            Passenger temp = node1.data;
-            node1.data = node2.data;
-            node2.data = temp;
-        }
-    }
 
     public void jenisTiket(Node <Passenger> head) {
         if (head == null) {
