@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class IceCreamNode {
     String flavor;
     IceCreamNode next;
@@ -59,4 +61,6 @@ class IceCreamStack {
             current = current.next;
         }
     }
-}
+ }
+
+    
