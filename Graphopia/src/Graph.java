@@ -76,7 +76,7 @@ class Graph {
         }
     }
 
-    private Node findNode(String name) {
+    public Node findNode(String name) {
         Node current = head;
         while (current != null) {
             if (current.name.equals(name)) {
@@ -133,7 +133,7 @@ class Graph {
         if (endNode.distance == Integer.MAX_VALUE) {
             System.out.println("No path from " + startName + " to " + endName);
         } else {
-            System.out.println("Shortest distance from " + startName + " to " + endName + " is: " + endNode.distance);
+            System.out.println("\nShortest distance from " + startName + " to " + endName + " is: " + endNode.distance);
         }
     }
 
