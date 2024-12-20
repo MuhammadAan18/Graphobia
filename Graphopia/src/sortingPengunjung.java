@@ -38,25 +38,31 @@ public class sortingPengunjung {
         }
     }
 
-    public class SortingPengunjung {
-        public void jenisTiket() {
-            int n = size();
-            for (int i = 0; i < n - 1; i++) {
-                for (int j = 0; j < n - i - 1; j++) {
-                    Node<Passenger> current = urutanNode(j);
-                    Node<Passenger> next = urutanNode(j + 1);
+    public void jenisTiket() {
+        int n = size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                Node<Passenger> current = urutanNode(j);
+                Node<Passenger> next = urutanNode(j + 1);
     
-                    if (current != null && next != null && !current.data.isVIP && next.data.isVIP) {
-                        swap(j, j + 1);
-                    }
+                if (current != null && next != null && !current.data.isVIP && next.data.isVIP) {
+                    swap(j, j + 1);
                 }
             }
         }
     }
 
-    public void displayAntrian(Node <Passenger> pengunjung){
+    public void displayAntrian(Node <Passenger> head){
         int no = 1;
-        System.out.println("=================GRAPHOPIA=================\n===============List Penumpang===============");
+        System.out.println("\r\n" + //
+                        "██╗     ██╗███████╗████████╗    ██████╗ ███████╗███╗   ██╗██╗   ██╗███╗   ███╗██████╗  █████╗ ███╗   ██╗ ██████╗ \r\n" + //
+                        "██║     ██║██╔════╝╚══██╔══╝    ██╔══██╗██╔════╝████╗  ██║██║   ██║████╗ ████║██╔══██╗██╔══██╗████╗  ██║██╔════╝ \r\n" + //
+                        "██║     ██║███████╗   ██║       ██████╔╝█████╗  ██╔██╗ ██║██║   ██║██╔████╔██║██████╔╝███████║██╔██╗ ██║██║  ███╗\r\n" + //
+                        "██║     ██║╚════██║   ██║       ██╔═══╝ ██╔══╝  ██║╚██╗██║██║   ██║██║╚██╔╝██║██╔═══╝ ██╔══██║██║╚██╗██║██║   ██║\r\n" + //
+                        "███████╗██║███████║   ██║       ██║     ███████╗██║ ╚████║╚██████╔╝██║ ╚═╝ ██║██║     ██║  ██║██║ ╚████║╚██████╔╝\r\n" + //
+                        "╚══════╝╚═╝╚══════╝   ╚═╝       ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ \r\n" + //
+                        "                                                                                                                 \r\n" + //
+                        "");
         Node<Passenger> current = head;
         while (current != null) {
             System.out.println(no + ". " + current.data);
