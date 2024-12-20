@@ -16,7 +16,6 @@ public class Graphopia {
         graph.addNode("Toilet");
         graph.addNode("Exit");
 
-        // Adding edges with weights
         graph.addEdge("Entrance", "Garden", 10);
         graph.addEdge("Entrance", "IceCream", 5);
         graph.addEdge("Garden", "IceCream", 2);
@@ -74,25 +73,43 @@ public class Graphopia {
         
                     Passenger pengunjungBaru = new Passenger(name, isVIP);
                     linkedListQueue.add(pengunjungBaru);
-                    System.out.println("Pengunjung " + name + " berhasil ditambahkan sebagai " + (isVIP ? "VIP" : "Regular") + "!");
+                    System.out.println("Pengunjung '" + name + "'' berhasil ditambahkan sebagai " + (isVIP ? "VIP" : "Regular") + "!");
                     break;
                 }
                 case 2: {
-                    System.out.print("Masukan Nama Pengunjung yang ingin dihapus : ");
-                    String nama = scanner.nextLine();
-                    String namaDihapus = nama;
-                    if (nama.equals(namaDihapus)) {
-                        linkedListQueue.dequeue();
-                        break;
+                    if (linkedListQueue.isEmpty()) {
+                        System.out.println("Belum ada pengunjung.");
                     } else {
-                        System.out.println("Input tidak valid. Harap masukkan nama yang benar.");
+                        System.out.print("Masukan Nama Pengunjung yang ingin dihapus : ");
+                        String nama = scanner.nextLine(); 
+                        boolean found = false;
+                        int size = 0;
+
+                        Node<Passenger> current = linkedListQueue.getHead();
+                        while (current != null) {
+                        size++;
+                        current = current.next;
+                        }
+                        for (int i = 0; i < size; i++) {
+                            Passenger passenger = linkedListQueue.dequeue(); // Ambil elemen dari antrean
+                            if (passenger.name.equalsIgnoreCase(nama) && !found) {
+                                found = true;
+                                System.out.println("Pengunjung dengan nama '" + nama + "' berhasil dihapus dari antrean.");
+                            } else {
+                                linkedListQueue.enqueue(passenger);
+                            }
+                        }
+                        if (!found) {
+                            System.out.println("Pengunjung dengan nama '" + nama + "' tidak ditemukan di antrean.");
+                        }
                     }
+                    break;
                 }
                 case 3: {
                     if (linkedListQueue.isEmpty()) {
                         System.out.println("Belum ada pengunjung.");
-                    } else {
-                        sorting.jenisTiket();
+                    }else {
+                        sorting.jenisTiket(linkedListQueue.getHead());
                         sorting.displayAntrian(linkedListQueue.getHead());
                     }
                     break;
@@ -100,8 +117,18 @@ public class Graphopia {
                 case 4: {
                     System.out.print("Masukan Nama Pengunjung yang ingin dicari: ");
                     String nama = scanner.nextLine();
-                    Passenger pencarian = sorting.searchingName(nama);
-                    if (pencarian == null) {
+                    Node<Passenger> current = linkedListQueue.getHead();
+                    boolean found = false;
+
+                    while (current != null) {
+                        if (current.data.name.equalsIgnoreCase(nama)) {
+                            System.out.println("Nama ditemukan : "+ current.data.name + ", Status tiket : " + (current.data.isVIP ? "VIP" : "Regular"));
+                            found = true;
+                            break;
+                        }
+                        current = current.next;
+                    }
+                    if (!found) {
                         System.out.println("Pengunjung dengan nama '" + nama + "' tidak ditemukan.");
                     }
                     break;
@@ -146,7 +173,11 @@ public class Graphopia {
                             default:
                                 System.out.println("Kakak mungkin pusing ya setelah naik wahana? Tolong kasih perintah yang benar ya kak^^");
                         }
-                        if (choice == 5) break; // Keluar dari submenu Ice Cream
+                        if (choice == 5){
+                            break; // Keluar dari submenu Ice Cream
+                        } else {
+                            System.out.println("Opsi yang kakak berikan invalid :("); 
+                        }
                     }
                     graph.dijkstra(startLocation, endLocation);
                     graph.printGraph();
@@ -159,6 +190,6 @@ public class Graphopia {
                 default:
                     System.out.println("Pilihan yang dimasukkan tidak valid, silakan coba lagi!");
             }
-        } while (opsi != 6); // Berhenti jika pengguna memilih opsi 6.
+        } while (opsi != 6); 
     }        
 }
