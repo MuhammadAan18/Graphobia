@@ -157,6 +157,7 @@ public class Graphopia {
                         edge = edge.next;
                         }
                     }
+                    
                     if (passesIceCream) {
                         System.out.println("\nStop!! Kita sudah sampai di Toko Ice Cream!");
                         while (true) {
