@@ -7,6 +7,7 @@ class Graph {
         Node next;
         boolean visited;
         int distance;
+        Node saveDijikstra;
 
         Node(String name) {
             this.name = name;
@@ -14,6 +15,7 @@ class Graph {
             this.next = null;
             this.visited = false;
             this.distance = Integer.MAX_VALUE;
+            this.saveDijikstra = null;
         }
     }
 
@@ -88,27 +90,19 @@ class Graph {
     }
 
     public void dijkstra(String startName, String endName) {
-        
-        Node current = head;
-        while (current != null) {
-            current.distance = Integer.MAX_VALUE;
-            current.visited = false;
-            current = current.next;
-        }
-
         Node startNode = findNode(startName);
         Node endNode = findNode(endName);
+        resetGraph();
         if (startNode == null || endNode == null) {
             System.out.println("Start or end node not found");
             return;
         }
 
-
         startNode.distance = 0;
 
         while (true) {
             Node smallest = null;
-            current = head;
+            Node current = head;
 
             while (current != null) {
                 if (!current.visited && (smallest == null || current.distance < smallest.distance)) {
@@ -133,18 +127,25 @@ class Graph {
                 Node target = edge.target;
                 if (!target.visited && smallest.distance + edge.weight < target.distance) {
                     target.distance = smallest.distance + edge.weight;
+                    target.saveDijikstra = smallest;
                 }
                 edge = edge.next;
             }
         }
 
         if (endNode.distance == Integer.MAX_VALUE) {
-            System.out.println("No path from " + startName + " to " + endName);
+            System.out.println("Path did not reach " + endName + ". Current path saved.");
         } else {
-            System.out.println("\nShortest distance from " + startName + " to " + endName + " is: " + endNode.distance);
+            System.out.println("Shortest distance from " + startName + " to " + endName + " is: " + endNode.distance);
+            
         }
     }
-
+    public void printPath(Node node) {
+        if (node != null) {
+            printPath(node.saveDijikstra);
+            System.out.print(node.name + " ");
+        }
+    }
     public void printGraph() {
         Node current = head;
         while (current != null) {
@@ -158,4 +159,13 @@ class Graph {
             current = current.next;
         }
     }
+    public void resetGraph() {
+        Node current = head; // Asumsikan 'head' adalah node awal dalam daftar semua node
+        while (current != null) {
+            current.distance = Integer.MAX_VALUE;
+            current.visited = false;
+            current = current.next;
+        }
+    }
+    
 }
