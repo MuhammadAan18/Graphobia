@@ -18,7 +18,6 @@ public class Graphopia {
 
         graph.addEdge("Entrance", "Garden", 10);
         graph.addEdge("Entrance", "IceCream", 5);
-        graph.addEdge("Garden", "IceCream", 2);
         graph.addEdge("Garden", "Playground", 3);
         graph.addEdge("Garden", "AnimalSection", 4);
         graph.addEdge("IceCream", "Playground", 6);
@@ -148,15 +147,17 @@ public class Graphopia {
                     boolean passesIceCream = false;
                     if (startNode != null) {
                         Graph.Edge edge = startNode.edges;
+                        System.out.println("Start node ditemukan: " + startNode.name);
                         while (edge != null) {
-                        if (edge.target.name.equals("IceCream")) {
+                        if (edge.target.name.equalsIgnoreCase("IceCream")) {
+                            System.out.println("Start node ditemukan: " + edge.target.name);
                         passesIceCream = true;
                         break;
                         }
                         edge = edge.next;
                         }
                     }
-                    if (!passesIceCream) {
+                    if (passesIceCream) {
                         System.out.println("\nStop!! Kita sudah sampai di Toko Ice Cream!");
                         while (true) {
                             System.out.println("\nPilih opsi:");

@@ -90,7 +90,7 @@ class Graph {
     public void dijkstra(String startName, String endName) {
         Node startNode = findNode(startName);
         Node endNode = findNode(endName);
-
+        resetGraph();
         if (startNode == null || endNode == null) {
             System.out.println("Start or end node not found");
             return;
@@ -150,4 +150,13 @@ class Graph {
             current = current.next;
         }
     }
+    public void resetGraph() {
+        Node current = head; // Asumsikan 'head' adalah node awal dalam daftar semua node
+        while (current != null) {
+            current.distance = Integer.MAX_VALUE;
+            current.visited = false;
+            current = current.next;
+        }
+    }
+    
 }
