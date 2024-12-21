@@ -89,7 +89,7 @@ public class Graphopia {
                 }
                 case 2: {
                     if (linkedListQueue.isEmpty()) {
-                        System.out.println("Belum ada pengunjung.");
+                        System.out.println("\nBelum ada pengunjung.");
                     } else {
                         System.out.print("Masukan Nama Pengunjung yang ingin dihapus : ");
                         String nama = scanner.nextLine(); 
@@ -118,7 +118,7 @@ public class Graphopia {
                 }
                 case 3: {
                     if (linkedListQueue.isEmpty()) {
-                        System.out.println("Belum ada pengunjung.");
+                        System.out.println("\nBelum ada pengunjung.");
                     }else {
                         sorting.jenisTiket(linkedListQueue.getHead());
                         sorting.displayAntrian(linkedListQueue.getHead());
@@ -126,6 +126,11 @@ public class Graphopia {
                     break;
                 }
                 case 4: {
+                    if (linkedListQueue.isEmpty()) {
+                        System.out.println("\nBelum ada pengunjung.");
+                        break;
+                    }
+
                     System.out.print("Masukan Nama Pengunjung yang ingin dicari: ");
                     String nama = scanner.nextLine();
                     Node<Passenger> current = linkedListQueue.getHead();
@@ -145,6 +150,11 @@ public class Graphopia {
                     break;
                 }
                 case 5: {
+                    if (linkedListQueue.isEmpty()) {
+                        System.out.println("\nAntrian pengunjung kosong. Silakan tambahkan pengunjung terlebih dahulu!");
+                        break;
+                    }
+
                     System.out.println("====================================================================");
                     System.out.println("|                *** RUTE GRAPHOPIA THEME PARK ***                 |");
                     System.out.println("====================================================================");
@@ -156,19 +166,16 @@ public class Graphopia {
                     String endLocation = scanner.nextLine();
 
                     Graph.Node startNode = graph.findNode(startLocation);
-                    Graph.Node endNode = graph.findNode(endLocation);
                     boolean passesIceCream = false;
 
                     if (startNode != null) {
                         Graph.Edge edge = startNode.edges;
-                        Graph.Edge edge2 = endNode.edges;
                         while (edge != null) {
-                            if (edge.target.name.equals("IceCream")|| edge2.target.name.equals("IceCream")) {
+                            if (edge.target.name.equals("IceCream")) {
                                 passesIceCream = true;
                                 break;
                             }
                             edge = edge.next;
-                            edge2 = edge2.next;
                         }
                     }
                     
@@ -238,6 +245,13 @@ public class Graphopia {
                         }
                     } 
                     graph.dijkstra(startLocation, endLocation);
+
+                    if (endLocation.equalsIgnoreCase("Exit")) {
+                        Passenger removedPassenger = linkedListQueue.dequeue();
+                        if (removedPassenger != null) {
+                            System.out.println("\nPengunjung " + removedPassenger.name + " telah meninggalkan taman bermain.");
+                        }
+                    }
                     break;
                 }
                 case 6: {
