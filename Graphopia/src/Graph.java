@@ -88,19 +88,27 @@ class Graph {
     }
 
     public void dijkstra(String startName, String endName) {
+        
+        Node current = head;
+        while (current != null) {
+            current.distance = Integer.MAX_VALUE;
+            current.visited = false;
+            current = current.next;
+        }
+
         Node startNode = findNode(startName);
         Node endNode = findNode(endName);
-
         if (startNode == null || endNode == null) {
             System.out.println("Start or end node not found");
             return;
         }
 
+
         startNode.distance = 0;
 
         while (true) {
             Node smallest = null;
-            Node current = head;
+            current = head;
 
             while (current != null) {
                 if (!current.visited && (smallest == null || current.distance < smallest.distance)) {
