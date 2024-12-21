@@ -10,6 +10,54 @@ class IceCreamNode {
     }
 }
 
+class FlavorList {
+    private IceCreamNode head;
+
+    FlavorList() {
+        this.head = null;
+    }
+
+    public void addFlavor(String flavor) {
+        IceCreamNode newNode = new IceCreamNode(flavor);
+        if (head == null) {
+            head = newNode;
+        } else {
+            IceCreamNode current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    public void displayFlavors() {
+        if (head == null) {
+            System.out.println("Tidak ada rasa tersedia.");
+            return;
+        }
+        IceCreamNode current = head;
+        int index = 1;
+        while (current != null) {
+            System.out.println(index + ". " + current.flavor);
+            current = current.next;
+            index++;
+        }
+    }
+
+    public String getFlavor(int index) {
+        IceCreamNode current = head;
+        int count = 1;
+        while (current != null) {
+            if (count == index) {
+                return current.flavor;
+            }
+            current = current.next;
+            count++;
+        }
+        return null;
+    }
+}
+
 class IceCreamStack {
     private IceCreamNode top;
 
@@ -65,11 +113,19 @@ public class IceCreamShop {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         IceCreamStack stack = new IceCreamStack();
+        FlavorList flavorList = new FlavorList();
 
-        String[] flavors = {
-            "Vanilla", "Chocolate", "Strawberry", "Mint", "Cookies and Cream", 
-            "Mango", "Pistachio", "Rocky Road", "Matcha", "Caramel"
-        };
+        // Add predefined flavors to the linked list
+        flavorList.addFlavor("Vanilla");
+        flavorList.addFlavor("Chocolate");
+        flavorList.addFlavor("Strawberry");
+        flavorList.addFlavor("Mint");
+        flavorList.addFlavor("Cookies and Cream");
+        flavorList.addFlavor("Mango");
+        flavorList.addFlavor("Pistachio");
+        flavorList.addFlavor("Rocky Road");
+        flavorList.addFlavor("Matcha");
+        flavorList.addFlavor("Caramel");
 
         System.out.println("Selamat datang di Ice Cream Shop!");
         boolean running = true;
@@ -90,16 +146,15 @@ public class IceCreamShop {
             switch (choice) {
                 case 1:
                     System.out.println("Daftar rasa yang tersedia:");
-                    for (int i = 0; i < flavors.length; i++) {
-                        System.out.println((i + 1) + ". " + flavors[i]);
-                    }
+                    flavorList.displayFlavors();
                     break;
                 case 2:
-                    System.out.println("Pilih rasa yang ingin ditambahkan (1-10):");
+                    System.out.println("Pilih rasa yang ingin ditambahkan (masukkan nomor rasa):");
                     int flavorChoice = scanner.nextInt();
                     scanner.nextLine(); // Consume newline
-                    if (flavorChoice >= 1 && flavorChoice <= flavors.length) {
-                        stack.push(flavors[flavorChoice - 1]);
+                    String selectedFlavor = flavorList.getFlavor(flavorChoice);
+                    if (selectedFlavor != null) {
+                        stack.push(selectedFlavor);
                     } else {
                         System.out.println("Pilihan tidak valid!");
                     }
