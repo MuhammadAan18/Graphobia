@@ -4,8 +4,20 @@ public class Graphopia {
         LinkedListQueue<Passenger> linkedListQueue = new LinkedListQueue<>();
         sortingPengunjung sorting = new sortingPengunjung();
         IceCreamStack iceCream = new IceCreamStack();
+        FlavorList flavor = new FlavorList();
         Graph graph = new Graph();
         Scanner scanner = new Scanner(System.in);
+
+        flavor.addFlavor("Vanilla");
+        flavor.addFlavor("Chocolate");
+        flavor.addFlavor("Strawberry");
+        flavor.addFlavor("Mint");
+        flavor.addFlavor("Cookies and Cream");
+        flavor.addFlavor("Mango");
+        flavor.addFlavor("Pistachio");
+        flavor.addFlavor("Rocky Road");
+        flavor.addFlavor("Matcha");
+        flavor.addFlavor("Caramel");
 
         graph.addNode("Entrance");
         graph.addNode("Garden");
@@ -25,7 +37,7 @@ public class Graphopia {
         graph.addEdge("AnimalSection", "Aquarium", 7);
         graph.addEdge("Aquarium", "Toilet", 2);
         graph.addEdge("Toilet", "Exit", 3);
-        int opsi;
+        int opsi; 
         do {
             System.out.println("");
             System.out.println("====================================================================");
@@ -144,61 +156,87 @@ public class Graphopia {
                     String endLocation = scanner.nextLine();
 
                     Graph.Node startNode = graph.findNode(startLocation);
+                    Graph.Node endNode = graph.findNode(endLocation);
                     boolean passesIceCream = false;
+
                     if (startNode != null) {
                         Graph.Edge edge = startNode.edges;
-                        System.out.println("Start node ditemukan: " + startNode.name);
+                        Graph.Edge edge2 = endNode.edges;
                         while (edge != null) {
-                        if (edge.target.name.equalsIgnoreCase("IceCream")) {
-                            System.out.println("Start node ditemukan: " + edge.target.name);
-                        passesIceCream = true;
-                        break;
-                        }
-                        edge = edge.next;
+                            if (edge.target.name.equals("IceCream")|| edge2.target.name.equals("IceCream")) {
+                                passesIceCream = true;
+                                break;
+                            }
+                            edge = edge.next;
+                            edge2 = edge2.next;
                         }
                     }
                     
                     if (passesIceCream) {
-                        System.out.println("\nStop!! Kita sudah sampai di Toko Ice Cream!");
-                        while (true) {
-                            System.out.println("\nPilih opsi:");
-                            System.out.println("1. Tambah rasa");
-                            System.out.println("2. Hapus rasa paling atas");
-                            System.out.println("3. Lihat rasa paling atas");
-                            System.out.println("4. Tampilkan semua rasa");
-                            System.out.println("5. Kembali ke menu utama");
-                            System.out.print("Masukkan pilihanmu: ");
-                            int choice = scanner.nextInt();
-                            scanner.nextLine();
+                        boolean validInput = false;
+
+                        while (!validInput) {
+                            System.out.println("\nAnda Menemukan Sebuah Toko Ice Cream!\nApakah Anda Ingin Membeli Ice Cream Terlebih Dahulu ?\n1. Ya\n2. Tidak");
+                            System.out.print("Pilihan : ");
+                            int pilih = scanner.nextInt();
+
+                            if (pilih == 1) {
+                                validInput = true;
+                                boolean running = true;
+                                while (running) {
+                                    System.out.println("\nPilih opsi:");
+                                    System.out.println("1. Lihat daftar rasa");
+                                    System.out.println("2. Tambah rasa ke cone");
+                                    System.out.println("3. Hapus rasa dari cone");
+                                    System.out.println("4. Lihat rasa paling atas");
+                                    System.out.println("5. Tampilkan semua rasa di cone");
+                                    System.out.println("6. Keluar");
+                                    System.out.print("Pilihan: ");
                         
-                            switch (choice) {
-                                case 1:
-                                    System.out.print("Baik, kak. Mau ice cream rasa apa? ");
-                                    String flavor = scanner.nextLine();
-                                    iceCream.push(flavor);
-                                    break;
-                                case 2:
-                                    iceCream.pop();
-                                    break;
-                                case 3:
-                                    iceCream.peek();
-                                    break;
-                                case 4:
-                                    iceCream.displayStack();
-                                    break;
-                                case 5:
-                                    System.out.println("Kembali ke menu utama.");
-                                    break;
-                                default:
-                                    System.out.println("Kakak mungkin pusing ya setelah naik wahana? Tolong kasih perintah yang benar ya kak^^");
-                            }
-                            if (choice == 5){
-                                break; // Keluar dari submenu Ice Cream
+                                    int choice = scanner.nextInt();
+                                    scanner.nextLine();
+                        
+                                    switch (choice) {
+                                        case 1:
+                                            System.out.println("\nDaftar rasa yang tersedia:");
+                                            flavor.displayFlavors();
+                                            break;
+                                        case 2:
+                                            System.out.print("Pilih rasa yang ingin ditambahkan (masukkan nomor rasa):");
+                                            int flavorChoice = scanner.nextInt();                                            
+                                            scanner.nextLine();
+                                            String selectedFlavor = flavor.getFlavor(flavorChoice);
+                                            if (selectedFlavor != null) {
+                                                iceCream.push(selectedFlavor);
+                                            } else {
+                                                System.out.println("Pilihan tidak valid!");
+                                            }
+                                            break;
+                                        case 3:
+                                            iceCream.pop();
+                                            break;
+                                        case 4:
+                                            iceCream.peek();;
+                                            break;
+                                        case 5:
+                                            iceCream.displayStack();
+                                            break;
+                                        case 6:
+                                            System.out.println("Terima kasih sudah mampir di Ice Cream Shop. Sampai jumpa!");
+                                            running = false;
+                                            break;
+                                        default:
+                                            System.out.println("Pilihan tidak valid, coba lagi!");
+                                    }
+                                }
+                            } else if (pilih == 2) {
+                                validInput = true;
                             } else {
-                                System.out.println("Opsi yang kakak berikan invalid :("); 
+                                System.out.println("Pilihan yang anda berikan salah, harap masukan Pilihan '1' atau '2'. ");
                             }
-                        }    
-                    }
+
+                        }
+                    } 
                     graph.dijkstra(startLocation, endLocation);
                     break;
                 }
@@ -209,6 +247,8 @@ public class Graphopia {
                 default:
                     System.out.println("Pilihan yang dimasukkan tidak valid, silakan coba lagi!");
             }
-        } while (opsi != 6); 
+        
+        }while (opsi != 6); 
+        scanner.close();
     }        
 }

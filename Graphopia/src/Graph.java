@@ -114,14 +114,7 @@ class Graph {
             if (smallest == null || smallest == endNode) break;
 
             smallest.visited = true;
-
-            // Check if the current node is "IceCreamStack"
-            // if (smallest.name.equals("IceCream")) {
-            //     System.out.println("Anda berada di Graph IceCream! Silakan pilih rasa es krim.");
-            //     IceCreamStack IceCreamStackSystem = new IceCreamStack();
-            //     IceCreamStackSystem.runIceCreamStackSystem();
-            // }
-
+            
             Edge edge = smallest.edges;
             while (edge != null) {
                 Node target = edge.target;

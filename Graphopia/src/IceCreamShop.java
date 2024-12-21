@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 class IceCreamNode {
     String flavor;
     IceCreamNode next;
@@ -106,77 +104,5 @@ class IceCreamStack {
             System.out.println("- " + current.flavor);
             current = current.next;
         }
-    }
-}
-
-public class IceCreamShop {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        IceCreamStack stack = new IceCreamStack();
-        FlavorList flavorList = new FlavorList();
-
-        // Add predefined flavors to the linked list
-        flavorList.addFlavor("Vanilla");
-        flavorList.addFlavor("Chocolate");
-        flavorList.addFlavor("Strawberry");
-        flavorList.addFlavor("Mint");
-        flavorList.addFlavor("Cookies and Cream");
-        flavorList.addFlavor("Mango");
-        flavorList.addFlavor("Pistachio");
-        flavorList.addFlavor("Rocky Road");
-        flavorList.addFlavor("Matcha");
-        flavorList.addFlavor("Caramel");
-
-        System.out.println("Selamat datang di Ice Cream Shop!");
-        boolean running = true;
-
-        while (running) {
-            System.out.println("\nPilih menu:");
-            System.out.println("1. Lihat daftar rasa");
-            System.out.println("2. Tambah rasa ke cone");
-            System.out.println("3. Hapus rasa dari cone");
-            System.out.println("4. Lihat rasa paling atas");
-            System.out.println("5. Tampilkan semua rasa di cone");
-            System.out.println("6. Keluar");
-            System.out.print("Pilihan: ");
-
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-
-            switch (choice) {
-                case 1:
-                    System.out.println("Daftar rasa yang tersedia:");
-                    flavorList.displayFlavors();
-                    break;
-                case 2:
-                    System.out.println("Pilih rasa yang ingin ditambahkan (masukkan nomor rasa):");
-                    int flavorChoice = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    String selectedFlavor = flavorList.getFlavor(flavorChoice);
-                    if (selectedFlavor != null) {
-                        stack.push(selectedFlavor);
-                    } else {
-                        System.out.println("Pilihan tidak valid!");
-                    }
-                    break;
-                case 3:
-                    stack.pop();
-                    break;
-                case 4:
-                    stack.peek();
-                    break;
-                case 5:
-                    stack.displayStack();
-                    break;
-                case 6:
-                    System.out.println("Terima kasih sudah mampir di Ice Cream Shop. Sampai jumpa!");
-                    running = false;
-                    break;
-                default:
-                    System.out.println("Pilihan tidak valid, coba lagi!");
-            }
-        }
-
-        scanner.close();
     }
 }
