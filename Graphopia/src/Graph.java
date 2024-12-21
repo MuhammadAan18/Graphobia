@@ -76,7 +76,7 @@ class Graph {
         }
     }
 
-    private Node findNode(String name) {
+    public Node findNode(String name) {
         Node current = head;
         while (current != null) {
             if (current.name.equals(name)) {
@@ -90,7 +90,7 @@ class Graph {
     public void dijkstra(String startName, String endName) {
         Node startNode = findNode(startName);
         Node endNode = findNode(endName);
-
+        resetGraph();
         if (startNode == null || endNode == null) {
             System.out.println("Start or end node not found");
             return;
@@ -133,7 +133,7 @@ class Graph {
         if (endNode.distance == Integer.MAX_VALUE) {
             System.out.println("No path from " + startName + " to " + endName);
         } else {
-            System.out.println("Shortest distance from " + startName + " to " + endName + " is: " + endNode.distance);
+            System.out.println("\nShortest distance from " + startName + " to " + endName + " is: " + endNode.distance);
         }
     }
 
@@ -150,4 +150,13 @@ class Graph {
             current = current.next;
         }
     }
+    public void resetGraph() {
+        Node current = head; // Asumsikan 'head' adalah node awal dalam daftar semua node
+        while (current != null) {
+            current.distance = Integer.MAX_VALUE;
+            current.visited = false;
+            current = current.next;
+        }
+    }
+    
 }
