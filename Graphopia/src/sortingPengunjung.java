@@ -35,7 +35,7 @@ public class sortingPengunjung {
     public void displayAntrian(Node <Passenger> head){
         int no = 1;
         System.out.println("====================================================================");
-        System.out.println("|            *** LIST PENUMPANG GRAPHOPIA THEME PARK ***           |");
+        System.out.println("|            *** LIST PENGUNJUNG GRAPHOPIA THEME PARK ***          |");
         System.out.println("====================================================================");
         Node<Passenger> current = head;
         while (current != null) {

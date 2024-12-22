@@ -223,7 +223,7 @@ public class Graphopia {
                                             iceCream.pop();
                                             break;
                                         case 4:
-                                            iceCream.peek();;
+                                            iceCream.peek();
                                             break;
                                         case 5:
                                             iceCream.displayStack();
