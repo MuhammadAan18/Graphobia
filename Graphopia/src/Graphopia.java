@@ -103,7 +103,7 @@ public class Graphopia {
                         }
                         for (int i = 0; i < size; i++) {
                             Passenger passenger = linkedListQueue.dequeue(); // Ambil elemen dari antrean
-                            if (passenger.name.equalsIgnoreCase(nama) && !found) {
+                            if (passenger.name.equals(nama) && !found) {
                                 found = true;
                                 System.out.println("Pengunjung dengan nama '" + nama + "' berhasil dihapus dari antrean.");
                             } else {
@@ -137,7 +137,7 @@ public class Graphopia {
                     boolean found = false;
 
                     while (current != null) {
-                        if (current.data.name.equalsIgnoreCase(nama)) {
+                        if (current.data.name.equals(nama)) {
                             System.out.println("Nama ditemukan : "+ current.data.name + ", Status tiket : " + (current.data.isVIP ? "VIP" : "Regular"));
                             found = true;
                             break;
