@@ -45,11 +45,11 @@ public class sortingPengunjung {
         }
     }
 
-    public Passenger searchingName(String name){
+    public Passenger searchingName(String name, Node<Passenger> head){
         Node<Passenger> current = head;
         while (current != null) {
-            if (current.data.name.equalsIgnoreCase(name)) {
-                System.out.println("Nama Ditemukan :" + current.data.name + "\nStatus tiket :" + (current.data.isVIP ? "VIP" : "Regular") );    
+            if (current.data.name.equals(name)) {
+                return current.data;    
             }
             current = current.next;
         }

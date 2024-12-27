@@ -133,18 +133,12 @@ public class Graphopia {
 
                     System.out.print("Masukan Nama Pengunjung yang ingin dicari: ");
                     String nama = scanner.nextLine();
-                    Node<Passenger> current = linkedListQueue.getHead();
-                    boolean found = false;
-
-                    while (current != null) {
-                        if (current.data.name.equals(nama)) {
-                            System.out.println("Nama ditemukan : "+ current.data.name + ", Status tiket : " + (current.data.isVIP ? "VIP" : "Regular"));
-                            found = true;
-                            break;
-                        }
-                        current = current.next;
-                    }
-                    if (!found) {
+                    
+                    Passenger result = sorting.searchingName(nama, linkedListQueue.getHead());
+                    
+                    if (result != null){
+                        System.out.println("Nama ditemukan : " + result.name + ", Status tiket : " + (result.isVIP ? "VIP" : "Regular"));
+                    } else {
                         System.out.println("Pengunjung dengan nama '" + nama + "' tidak ditemukan.");
                     }
                     break;
